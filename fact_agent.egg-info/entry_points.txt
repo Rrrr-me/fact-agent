@@ -1,0 +1,5 @@
+[console_scripts]
+fact-agent = fact_agent.agent:main
+fact-auto-render = scripts.auto_render:main
+fact-memory = fact_agent.memory_cli:main
+fact-render = fact_agent.render_cli:main

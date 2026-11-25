@@ -1,0 +1,240 @@
+# Fact Agent
+
+A general-purpose fact-based AI agent with persistent memory, cloud rendering, and tool use capabilities.
+
+## Features
+
+- **Persistent Memory**: Dual-memory architecture (short-term conversation + long-term fact extraction)
+- **Vector Memory**: Local embeddings (256-dim) with cosine similarity search, no external ML deps
+- **Fact-Based Responses**: System prompt enforces factual accuracy, uncertainty identification
+- **Semantic Memory Retrieval**: LLM-powered retrieval with keyword fallback
+- **Agent Tools**: Web search, calculator, file operations via function calling
+- **Cloud Rendering**: JANCTION API integration for Blender rendering
+- **Configurable**: Environment-based configuration via `.env`
+- **Packaged**: Install with `pip install -e .`, use `fact-agent`, `fact-memory`, `fact-render`
+
+## Quick Start
+
+```bash
+# Install package (development mode)
+pip install -e .
+
+# Configure
+cp .env.example .env
+# Edit .env with your API keys
+
+# Run agent
+fact-agent
+
+# Or use CLI tools
+fact-memory stats
+fact-render account
+```
+
+## Project Structure
+
+```
+fact-agent/
+├── fact_agent/              # Main package
+│   ├── __init__.py         # Exports all public APIs
+│   ├── agent.py            # Main CLI agent loop
+│   ├── config.py           # Configuration management
+│   ├── http_client.py      # HTTP client with retries
+│   ├── memory_extractor.py # Fact extraction from conversations
+│   ├── memory_retriever.py # Vector + semantic + keyword retrieval
+│   ├── vector_memory.py    # Local embedding vector search
+│   ├── cloud_renderer.py   # JANCTION cloud rendering client
+│   ├── render_pipeline.py  # Full render job pipeline
+│   ├── tools.py            # Tool framework (web search, calc, file ops)
+│   ├── logging_setup.py    # Logging configuration
+│   ├── exceptions.py       # Custom exceptions
+│   ├── memory_cli.py       # Memory management CLI
+│   └── render_cli.py       # Render management CLI
+├── first_scene.py          # Blender scene generator
+├── test_basic.py           # Unit tests
+├── requirements.txt        # Dependencies
+├── pyproject.toml          # Package configuration
+├── .env                    # Your configuration (not committed)
+├── .env.example            # Template
+├── memory.db               # Conversation history (auto-created)
+├── long_term_memory.db     # Extracted facts (auto-created)
+├── vector_memory.db        # Vector embeddings (auto-created)
+└── logs/                   # Log files (auto-created)
+```
+
+## Installation
+
+```bash
+# Development install (recommended)
+pip install -e .
+
+# With optional dependencies
+pip install -e .[dev]    # Testing, linting, type checking
+pip install -e .[vector] # sqlite-vec for native vector search
+pip install -e .[render] # bpy for Blender Python API
+```
+
+## CLI Commands
+
+### `fact-agent` - Main Agent
+```bash
+fact-agent          # Start interactive agent
+# Type 'exit' or 'quit' to quit
+```
+
+### `fact-memory` - Memory Management
+```bash
+fact-memory list                    # List all long-term memories
+fact-memory search "query" -l 10    # Search memories
+fact-memory extract "text"          # Extract facts from text
+fact-memory stats                   # Show memory statistics
+fact-memory clear -y                # Clear all memories (with -y skip confirm)
+```
+
+### `fact-render` - Cloud Rendering
+```bash
+fact-render account                 # Check account status & limits
+fact-render estimate --width 1920 --height 1080  # Preview cost estimate
+fact-render submit scene.blend --frame-end 900   # Submit .blend for rendering
+fact-render status <job_id>         # Check job status
+fact-render wait <job_id>           # Wait for completion (with progress)
+fact-render download <job_id> ./out # Download results
+fact-render render first_scene.py ./renders  # Full pipeline: scene → cloud → download
+```
+
+## Configuration
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `LLM_API_URL` | LLM API endpoint | `http://localhost:3001/v1/chat/completions` |
+| `LLM_API_KEY` | LLM API key | (required) |
+| `LLM_MODEL` | Model identifier | `auto` |
+| `CONVERSATION_LIMIT` | Recent turns to remember | `20` |
+| `MEMORY_RETRIEVAL_LIMIT` | Max memories per query | `8` |
+| `ENABLE_SEMANTIC_RETRIEVAL` | Use LLM for retrieval | `true` |
+| `ENABLE_MEMORY_EXTRACTION` | Extract facts from chat | `true` |
+| `ENABLE_VECTOR_RETRIEVAL` | Use vector search | `true` |
+| `JANCTION_API_KEY_PATH` | Render API key file | `~/.config/fact-agent/janction_api_key.txt` |
+| `LOG_LEVEL` | Logging verbosity | `INFO` |
+| `LOG_FILE` | Optional log file | `logs/fact-agent.log` |
+
+## Memory System
+
+### Short-term (`memory.db`)
+SQLite table `conversations` stores recent dialogue for context.
+
+### Long-term (`long_term_memory.db`)
+SQLite table `memories` stores extracted facts:
+- `category`: Project, Preference, Fact, Person, etc.
+- `fact`: The extracted statement
+- Deduplicated on exact fact match
+
+### Vector Memory (`vector_memory.db`)
+SQLite table `vector_memories` stores embeddings:
+- 256-dim local hash-based embeddings
+- Cosine similarity search
+- Auto-generated on fact extraction
+
+### Retrieval Priority
+1. **Vector** (fast, semantic): Local embeddings with cosine similarity
+2. **Semantic** (LLM-based): LLM selects relevant memories by meaning
+3. **Keyword** (fallback): Word overlap scoring
+
+## Agent Tools
+
+The agent has access to tools via function calling:
+
+| Tool | Description | Example |
+|------|-------------|---------|
+| `web_search` | Bing HTML search, extracts real URLs | "Search for Python 3.13 release date" |
+| `calculator` | Safe math eval (sqrt, sin, log, pi, e) | "Calculate 2 * pi * 5" |
+| `file_ops` | Read/write/list files in workspace | "Read config file" |
+
+Tools are called automatically by the LLM when needed.
+
+## Cloud Rendering
+
+JANCTION API integration for Blender cloud rendering:
+
+```python
+from fact_agent import CloudRenderer, RenderConfig
+
+renderer = CloudRenderer()
+account = renderer.check_account()
+
+# Full pipeline
+files = renderer.render_scene(
+    Path("first_scene.py"),
+    Path("./renders"),
+    RenderConfig(frame_end=900, width=1080, height=1920)
+)
+```
+
+### RenderConfig Options
+- `frame_start`, `frame_end`: Frame range
+- `width`, `height`: Resolution
+- `samples`: Cycles samples
+- `engine`: CYCLES, EEVEE, WORKBENCH
+- `device`: GPU, CPU
+- `output_format`: PNG, JPEG, EXR, MP4
+- `priority`: low, normal, high
+
+## Blender Scene
+
+`first_scene.py` generates a "midnight mystery forest" scene:
+- Vertical 1080×1920 (mobile/social format)
+- Animated glowing orb + floating rings
+- Camera dolly, volumetric lighting
+- Run inside Blender: `blender --python first_scene.py`
+
+## Development
+
+```bash
+# Syntax check
+python -m py_compile fact_agent/*.py
+
+# Run tests
+python test_basic.py
+
+# Run with debug logging
+LOG_LEVEL=DEBUG fact-agent
+
+# Lint
+ruff check fact_agent/
+
+# Type check
+mypy fact_agent/
+```
+
+## Architecture
+
+```
+┌─────────────┐     ┌──────────────────┐     ┌─────────────────┐
+│   User      │────▶│   Agent Loop     │────▶│   LLM API       │
+│   Input     │     │  (fact_agent)    │     │  (local/remote) │
+└─────────────┘     └────────┬─────────┘     └─────────────────┘
+                             │
+              ┌──────────────┼──────────────┐
+              ▼              ▼              ▼
+       ┌────────────┐ ┌─────────────┐ ┌────────────┐
+       │ Short-term │ │  Long-term  │ │  Extractor │
+       │  Memory    │ │  Memory     │ │  (LLM)     │
+       │ (SQLite)   │ │  (SQLite)   │ │            │
+       └────────────┘ └─────────────┘ └────────────┘
+              ▲              ▲              ▲
+              │              │              │
+       ┌──────┴──────┐ ┌─────┴──────┐ ┌────┴─────┐
+       │  Vector     │ │  Semantic  │ │  Keyword │
+       │  Search     │ │  Retrieval │ │  Fallback│
+       └─────────────┘ └────────────┘ └──────────┘
+                             │
+              ┌──────────────┼──────────────┐
+              ▼              ▼              ▼
+       ┌────────────┐ ┌─────────────┐ ┌────────────┐
+       │ Web Search │ │ Calculator  │ │ File Ops   │
+       └────────────┘ └─────────────┘ └────────────┘
+```
+
+## License
+
+MIT

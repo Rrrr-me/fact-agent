@@ -1,0 +1,62 @@
+"""Fact Agent - JANCTION cloud renderer foundation."""
+
+import json
+import pathlib
+import stat
+import urllib.request
+
+API_BASE = "https://render.janction.jp"
+KEY_FILE = pathlib.Path.home() / ".config/fact-agent/janction_api_key.txt"
+
+
+def load_api_key():
+    if not KEY_FILE.is_file():
+        raise RuntimeError("JANCTION API key file not found.")
+
+    permissions = stat.S_IMODE(KEY_FILE.stat().st_mode)
+    if permissions & 0o077:
+        raise RuntimeError("API key permissions are too open.")
+
+    key = KEY_FILE.read_text().strip()
+    if not key:
+        raise RuntimeError("API key file is empty.")
+
+    return key
+
+
+def request_json(endpoint, method="GET", payload=None):
+    key = load_api_key()
+    data = None if payload is None else json.dumps(payload).encode()
+
+    headers = {"X-API-Key": key}
+    if data is not None:
+        headers["Content-Type"] = "application/json"
+
+    req = urllib.request.Request(
+        API_BASE + endpoint,
+        data=data,
+        headers=headers,
+        method=method
+    )
+
+    with urllib.request.urlopen(req, timeout=20) as response:
+        return json.loads(response.read())
+
+
+def check_account():
+    account = request_json("/v1/me")
+    limits = account.get("limits", {})
+
+    return {
+        "authenticated": True,
+        "job_limit_yen": limits.get("job_yen"),
+        "daily_limit_yen": limits.get("day_yen"),
+        "limits_applied": limits.get("applies")
+    }
+
+
+if __name__ == "__main__":
+    try:
+        print(json.dumps(check_account(), indent=2))
+    except Exception as error:
+        print("Account check failed:", type(error).__name__, str(error))

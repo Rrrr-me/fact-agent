@@ -1,0 +1,388 @@
+"12:19:25 | INFO     | fact_agent | Logging initialized"
+"12:20:25 | INFO     | fact_agent | Logging initialized"
+"12:20:26 | INFO     | fact_agent.memory_extractor | Stored memories"
+"12:20:26 | INFO     | fact_agent.memory_extractor | Stored memories"
+"12:20:47 | INFO     | fact_agent | Logging initialized"
+"12:20:47 | INFO     | fact_agent.memory_extractor | Stored memories"
+"12:20:47 | INFO     | fact_agent.memory_extractor | Stored memories"
+"12:20:57 | INFO     | fact_agent | Logging initialized"
+"12:21:20 | INFO     | fact_agent | Logging initialized"
+"12:21:40 | INFO     | fact_agent | Logging initialized"
+"12:21:47 | INFO     | fact_agent | Logging initialized"
+"12:21:48 | INFO     | fact_agent.memory_extractor | Stored memories"
+"12:21:48 | INFO     | fact_agent.memory_extractor | Stored memories"
+"12:22:48 | INFO     | fact_agent | Logging initialized"
+"12:23:14 | INFO     | fact_agent | Logging initialized"
+"12:23:14 | ERROR    | fact_agent.cloud_renderer | Account check failed"
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/fact-agent/cloud_renderer.py", line 38, in check_account
+    account = self.client.check_account()
+              ^^^^^^^^^^^
+  File "/data/data/com.termux/files/home/fact-agent/cloud_renderer.py", line 27, in client
+    api_key = load_janction_key(self.settings)
+  File "/data/data/com.termux/files/home/fact-agent/config.py", line 163, in load_janction_key
+    raise RuntimeError(f"JANCTION API key file not found: {path}")
+RuntimeError: JANCTION API key file not found: /root/.config/fact-agent/janction_api_key.txt
+"12:23:24 | INFO     | fact_agent | Logging initialized"
+"12:23:34 | INFO     | fact_agent | Logging initialized"
+"12:23:34 | ERROR    | fact_agent.memory_retriever | Memory retrieval error"
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/fact-agent/memory_retriever.py", line 136, in retrieve_memories
+    result = semantic_retrieval(rows, query, limit, client)
+  File "/data/data/com.termux/files/home/fact-agent/memory_retriever.py", line 67, in semantic_retrieval
+    prompt = SEMANTIC_PROMPT.format(
+        query=query,
+        memories=json.dumps(candidates, ensure_ascii=False),
+    )
+KeyError: '"ids"'
+"12:23:58 | INFO     | fact_agent | Logging initialized"
+"12:24:20 | INFO     | fact_agent | Logging initialized"
+"12:24:20 | INFO     | fact_agent.memory_extractor | Stored memories"
+"12:24:20 | INFO     | fact_agent.memory_extractor | Stored memories"
+"12:24:43 | INFO     | fact_agent | Logging initialized"
+"12:24:47 | INFO     | fact_agent.memory_extractor | Stored memories"
+"12:24:54 | INFO     | fact_agent | Logging initialized"
+"12:25:13 | INFO     | fact_agent | Logging initialized"
+"12:25:21 | WARNING  | fact_agent.memory_retriever | Semantic retrieval failed, falling back to keyword"
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/fact-agent/memory_retriever.py", line 84, in semantic_retrieval
+    raise ValueError("No JSON object in response")
+ValueError: No JSON object in response
+"12:26:00 | INFO     | fact_agent | Logging initialized"
+"12:26:26 | INFO     | fact_agent | Logging initialized"
+"12:27:05 | INFO     | fact_agent | Logging initialized"
+"12:27:06 | INFO     | fact_agent.memory_extractor | Stored memories"
+"12:27:06 | INFO     | fact_agent.memory_extractor | Stored memories"
+"12:27:57 | INFO     | fact_agent | Logging initialized"
+"12:27:58 | INFO     | fact_agent.memory_extractor | Stored memories"
+"12:27:58 | INFO     | fact_agent.memory_extractor | Stored memories"
+"12:35:16 | INFO     | fact_agent | Logging initialized"
+"12:35:16 | WARNING  | fact_agent.vector_memory | Embedding API failed, switching to local"
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/fact-agent/vector_memory.py", line 130, in _get_embedding
+    return self._get_api_embedding(text)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/data/data/com.termux/files/home/fact-agent/vector_memory.py", line 159, in _get_api_embedding
+    with urllib.request.urlopen(req, timeout=30) as response:
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/urllib/request.py", line 187, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/urllib/request.py", line 493, in open
+    response = meth(req, response)
+  File "/usr/lib/python3.14/urllib/request.py", line 602, in http_response
+    response = self.parent.error(
+        'http', request, response, code, msg, hdrs)
+  File "/usr/lib/python3.14/urllib/request.py", line 531, in error
+    return self._call_chain(*args)
+           ~~~~~~~~~~~~~~~~^^^^^^^
+  File "/usr/lib/python3.14/urllib/request.py", line 464, in _call_chain
+    result = func(*args)
+  File "/usr/lib/python3.14/urllib/request.py", line 611, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 502: Bad Gateway
+"12:35:56 | INFO     | fact_agent | Logging initialized"
+"12:35:57 | INFO     | fact_agent.memory_extractor | Stored memories"
+"12:35:57 | INFO     | fact_agent.memory_extractor | Stored memories"
+"12:36:32 | INFO     | fact_agent | Logging initialized"
+"12:36:32 | INFO     | fact_agent.memory_extractor | Stored memories"
+"12:36:32 | INFO     | fact_agent.memory_extractor | Stored memories"
+"12:36:43 | INFO     | fact_agent | Logging initialized"
+"12:38:04 | INFO     | fact_agent | Logging initialized"
+"12:38:05 | INFO     | fact_agent.memory_extractor | Stored memories"
+"12:38:05 | INFO     | fact_agent.memory_extractor | Stored memories"
+"12:38:23 | INFO     | fact_agent | Logging initialized"
+"12:40:56 | INFO     | fact_agent | Logging initialized"
+"12:40:56 | INFO     | fact_agent.memory_extractor | Stored memories"
+"12:40:56 | INFO     | fact_agent.memory_extractor | Stored memories"
+"12:47:00 | INFO     | fact_agent | Logging initialized"
+"12:47:01 | INFO     | fact_agent.memory_extractor | Stored memories"
+"12:47:01 | INFO     | fact_agent.memory_extractor | Stored memories"
+"12:47:11 | INFO     | fact_agent | Logging initialized"
+"12:47:57 | INFO     | fact_agent | Logging initialized"
+"12:47:57 | INFO     | fact_agent.memory_extractor | Stored memories"
+"12:47:57 | INFO     | fact_agent.memory_extractor | Stored memories"
+"13:06:01 | INFO     | fact_agent | Logging initialized"
+"13:06:02 | INFO     | fact_agent.memory_extractor | Stored memories"
+"13:06:02 | INFO     | fact_agent.memory_extractor | Stored memories"
+"13:06:11 | INFO     | fact_agent | Logging initialized"
+"13:06:48 | INFO     | fact_agent | Logging initialized"
+"13:06:50 | ERROR    | fact_agent.__main__ | LLM request failed"
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/fact-agent/agent.py", line 212, in main
+    answer = llm_client.chat_completion_with_tools(
+        messages,
+        tools=tool_registry.get_function_specs(),
+    )
+  File "/data/data/com.termux/files/home/fact-agent/http_client.py", line 179, in chat_completion_with_tools
+    logger.info("Executing tool", extra={"tool": function_name, "args": function_args})
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/logging/__init__.py", line 1520, in info
+    self._log(INFO, msg, args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/logging/__init__.py", line 1663, in _log
+    record = self.makeRecord(self.name, level, fn, lno, msg, args,
+                             exc_info, func, extra, sinfo)
+  File "/usr/lib/python3.14/logging/__init__.py", line 1637, in makeRecord
+    raise KeyError("Attempt to overwrite %r in LogRecord" % key)
+KeyError: "Attempt to overwrite 'args' in LogRecord"
+"13:07:37 | INFO     | fact_agent | Logging initialized"
+"13:07:40 | INFO     | fact_agent.http_client | Executing tool"
+"13:07:43 | INFO     | fact_agent.http_client | Executing tool"
+"13:07:49 | INFO     | fact_agent.http_client | Executing tool"
+"13:07:57 | INFO     | fact_agent.http_client | Executing tool"
+"13:08:01 | INFO     | fact_agent.http_client | Executing tool"
+"13:08:15 | INFO     | fact_agent | Logging initialized"
+"13:08:18 | INFO     | fact_agent.http_client | Executing tool"
+"13:08:21 | INFO     | fact_agent.http_client | Executing tool"
+"13:08:24 | INFO     | fact_agent.http_client | Executing tool"
+"13:08:28 | INFO     | fact_agent.http_client | Executing tool"
+"13:08:31 | INFO     | fact_agent.http_client | Executing tool"
+"13:08:47 | INFO     | fact_agent | Logging initialized"
+"13:08:50 | INFO     | fact_agent.http_client | Executing tool"
+"13:08:55 | INFO     | fact_agent.http_client | Executing tool"
+"13:09:00 | INFO     | fact_agent.http_client | Executing tool"
+"13:09:06 | INFO     | fact_agent.http_client | Executing tool"
+"13:09:09 | INFO     | fact_agent.http_client | Executing tool"
+"13:09:28 | INFO     | fact_agent | Logging initialized"
+"13:09:28 | INFO     | fact_agent.memory_extractor | Stored memories"
+"13:09:28 | INFO     | fact_agent.memory_extractor | Stored memories"
+"13:10:33 | INFO     | fact_agent | Logging initialized"
+"13:10:33 | INFO     | fact_agent.memory_extractor | Stored memories"
+"13:10:33 | INFO     | fact_agent.memory_extractor | Stored memories"
+"13:11:46 | INFO     | fact_agent | Logging initialized"
+"13:11:47 | INFO     | fact_agent.memory_extractor | Stored memories"
+"13:11:47 | INFO     | fact_agent.memory_extractor | Stored memories"
+"13:25:14 | INFO     | fact_agent | Logging initialized"
+"13:26:54 | INFO     | fact_agent | Logging initialized"
+"13:27:19 | INFO     | fact_agent | Logging initialized"
+"13:27:47 | INFO     | fact_agent | Logging initialized"
+"13:28:07 | INFO     | fact_agent | Logging initialized"
+"13:28:07 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"13:28:07 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"13:28:19 | INFO     | fact_agent | Logging initialized"
+"13:28:22 | INFO     | fact_agent.fact_agent.http_client | Executing tool"
+"13:28:25 | INFO     | fact_agent.fact_agent.http_client | Executing tool"
+"13:28:27 | INFO     | fact_agent.fact_agent.http_client | Executing tool"
+"13:28:32 | INFO     | fact_agent.fact_agent.http_client | Executing tool"
+"13:28:40 | INFO     | fact_agent.fact_agent.http_client | Executing tool"
+"13:30:52 | INFO     | fact_agent | Logging initialized"
+"13:30:53 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"13:30:53 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"13:31:04 | INFO     | fact_agent | Logging initialized"
+"13:31:16 | INFO     | fact_agent | Logging initialized"
+"13:31:28 | INFO     | fact_agent | Logging initialized"
+"17:22:14 | INFO     | fact_agent | Logging initialized"
+"17:22:32 | INFO     | fact_agent | Logging initialized"
+"17:22:33 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"17:22:33 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"17:22:55 | INFO     | fact_agent | Logging initialized"
+"17:23:39 | INFO     | fact_agent | Logging initialized"
+"17:23:54 | INFO     | fact_agent | Logging initialized"
+"17:24:13 | INFO     | fact_agent | Logging initialized"
+"17:24:31 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"17:24:31 | INFO     | fact_agent.fact_agent.agent | Extracted new memories"
+"17:24:46 | INFO     | fact_agent | Logging initialized"
+"17:25:00 | INFO     | fact_agent | Logging initialized"
+"17:25:15 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"17:25:15 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"17:25:15 | INFO     | fact_agent.fact_agent.memory_consolidator | Memory consolidation complete"
+"17:25:27 | INFO     | fact_agent | Logging initialized"
+"17:25:39 | INFO     | fact_agent | Logging initialized"
+"17:25:39 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"17:25:40 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"17:27:46 | INFO     | fact_agent | Logging initialized"
+"17:27:48 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"17:27:48 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"17:28:18 | INFO     | fact_agent | Logging initialized"
+"17:41:15 | INFO     | fact_agent | Logging initialized"
+"17:41:17 | ERROR    | fact_agent.fact_agent.agent | LLM request failed"
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/fact-agent/fact_agent/agent.py", line 220, in main
+    for chunk in stream_response(
+                 ~~~~~~~~~~~~~~~^
+        llm_client,
+        ^^^^^^^^^^^
+        messages,
+        ^^^^^^^^^
+        tools=tool_registry.get_function_specs(),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/data/data/com.termux/files/home/fact-agent/fact_agent/streaming.py", line 189, in stream_response
+    yield from client.chat_completion_with_tools_stream(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'LLMClient' object has no attribute 'chat_completion_with_tools_stream'. Did you mean: 'chat_completion_with_tools'?
+"17:44:00 | INFO     | fact_agent | Logging initialized"
+"17:44:25 | ERROR    | fact_agent.fact_agent.streaming | Streaming error"
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/fact-agent/fact_agent/streaming.py", line 71, in chat_completion_stream
+    delta = chunk.get("choices", [{}])[0].get("delta", {})
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+"17:44:25 | ERROR    | fact_agent.fact_agent.agent | LLM request failed"
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/fact-agent/fact_agent/agent.py", line 220, in main
+    for chunk in stream_response(
+                 ~~~~~~~~~~~~~~~^
+        llm_client,
+        ^^^^^^^^^^^
+        messages,
+        ^^^^^^^^^
+        tools=tool_registry.get_function_specs(),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/data/data/com.termux/files/home/fact-agent/fact_agent/streaming.py", line 198, in stream_response
+    yield from chat_completion_stream(
+    ...<5 lines>...
+    )
+  File "/data/data/com.termux/files/home/fact-agent/fact_agent/streaming.py", line 71, in chat_completion_stream
+    delta = chunk.get("choices", [{}])[0].get("delta", {})
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+"17:46:39 | INFO     | fact_agent | Logging initialized"
+"17:47:15 | INFO     | fact_agent | Logging initialized"
+"17:47:15 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"17:47:15 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"17:47:27 | INFO     | fact_agent | Logging initialized"
+"17:47:30 | INFO     | fact_agent.fact_agent.streaming | Executing tool"
+"17:47:31 | INFO     | fact_agent.fact_agent.streaming | Executing tool"
+"17:47:33 | INFO     | fact_agent.fact_agent.streaming | Executing tool"
+"17:47:43 | INFO     | fact_agent.fact_agent.streaming | Executing tool"
+"17:47:46 | INFO     | fact_agent.fact_agent.streaming | Executing tool"
+"17:48:11 | INFO     | fact_agent | Logging initialized"
+"17:48:15 | INFO     | fact_agent.fact_agent.streaming | Executing tool"
+"17:48:48 | INFO     | fact_agent | Logging initialized"
+"17:48:49 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"17:48:49 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"17:49:39 | INFO     | fact_agent | Logging initialized"
+"17:49:40 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"17:49:40 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"17:54:49 | INFO     | fact_agent | Logging initialized"
+"17:54:55 | INFO     | fact_agent.fact_agent.streaming | Executing tool"
+"17:55:28 | INFO     | fact_agent | Logging initialized"
+"17:55:30 | INFO     | fact_agent.fact_agent.streaming | Executing tool"
+"17:55:53 | INFO     | fact_agent | Logging initialized"
+"17:55:56 | INFO     | fact_agent.fact_agent.streaming | Executing tool"
+"18:01:10 | INFO     | fact_agent | Logging initialized"
+"18:01:11 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"18:01:11 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"18:01:47 | INFO     | fact_agent | Logging initialized"
+"18:02:41 | INFO     | fact_agent | Logging initialized"
+"18:02:41 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"18:02:41 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"18:03:40 | INFO     | fact_agent | Logging initialized"
+"18:03:40 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"18:03:40 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"18:03:53 | INFO     | fact_agent | Logging initialized"
+"18:03:57 | INFO     | fact_agent.fact_agent.streaming | Executing tool"
+"18:04:01 | INFO     | fact_agent.fact_agent.streaming | Executing tool"
+"18:04:30 | INFO     | fact_agent | Logging initialized"
+"18:04:33 | INFO     | fact_agent.fact_agent.streaming | Executing tool"
+"18:15:56 | INFO     | fact_agent | Logging initialized"
+"18:15:57 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"18:15:57 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"18:18:13 | INFO     | fact_agent | Logging initialized"
+"18:18:48 | INFO     | fact_agent | Logging initialized"
+"18:19:24 | INFO     | fact_agent | Logging initialized"
+"18:20:37 | INFO     | fact_agent | Logging initialized"
+"18:23:05 | INFO     | fact_agent | Logging initialized"
+"18:24:42 | INFO     | fact_agent | Logging initialized"
+"18:25:37 | INFO     | fact_agent | Logging initialized"
+"18:26:15 | INFO     | fact_agent | Logging initialized"
+"18:26:48 | INFO     | fact_agent | Logging initialized"
+"18:27:11 | INFO     | fact_agent | Logging initialized"
+"18:27:53 | INFO     | fact_agent | Logging initialized"
+"18:27:54 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"18:27:54 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"18:29:00 | INFO     | fact_agent | Logging initialized"
+"18:29:02 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"18:29:02 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"18:29:34 | INFO     | fact_agent | Logging initialized"
+"20:05:36 | INFO     | fact_agent | Logging initialized"
+"20:10:52 | ERROR    | fact_agent.fact_agent.streaming | Tool calling request failed"
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/fact-agent/fact_agent/streaming.py", line 150, in stream_response
+    with urllib.request.urlopen(req, timeout=client.timeout) as response:
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/usr/lib/python3.14/urllib/request.py", line 187, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/usr/lib/python3.14/urllib/request.py", line 487, in open
+    response = self._open(req, data)
+  File "/data/data/com.termux/files/usr/lib/python3.14/urllib/request.py", line 504, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+                              '_open', req)
+  File "/data/data/com.termux/files/usr/lib/python3.14/urllib/request.py", line 464, in _call_chain
+    result = func(*args)
+  File "/data/data/com.termux/files/usr/lib/python3.14/urllib/request.py", line 1362, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/usr/lib/python3.14/urllib/request.py", line 1337, in do_open
+    r = h.getresponse()
+  File "/data/data/com.termux/files/usr/lib/python3.14/http/client.py", line 1478, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "/data/data/com.termux/files/usr/lib/python3.14/http/client.py", line 343, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "/data/data/com.termux/files/usr/lib/python3.14/http/client.py", line 304, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/usr/lib/python3.14/socket.py", line 729, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+TimeoutError: timed out
+"20:10:52 | ERROR    | fact_agent.fact_agent.agent | LLM request failed"
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/fact-agent/fact_agent/agent.py", line 220, in main
+    for chunk in stream_response(
+                 ~~~~~~~~~~~~~~~^
+        llm_client,
+        ^^^^^^^^^^^
+        messages,
+        ^^^^^^^^^
+        tools=tool_registry.get_function_specs(),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/data/data/com.termux/files/home/fact-agent/fact_agent/streaming.py", line 150, in stream_response
+    with urllib.request.urlopen(req, timeout=client.timeout) as response:
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/usr/lib/python3.14/urllib/request.py", line 187, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/usr/lib/python3.14/urllib/request.py", line 487, in open
+    response = self._open(req, data)
+  File "/data/data/com.termux/files/usr/lib/python3.14/urllib/request.py", line 504, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+                              '_open', req)
+  File "/data/data/com.termux/files/usr/lib/python3.14/urllib/request.py", line 464, in _call_chain
+    result = func(*args)
+  File "/data/data/com.termux/files/usr/lib/python3.14/urllib/request.py", line 1362, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/usr/lib/python3.14/urllib/request.py", line 1337, in do_open
+    r = h.getresponse()
+  File "/data/data/com.termux/files/usr/lib/python3.14/http/client.py", line 1478, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "/data/data/com.termux/files/usr/lib/python3.14/http/client.py", line 343, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "/data/data/com.termux/files/usr/lib/python3.14/http/client.py", line 304, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/usr/lib/python3.14/socket.py", line 729, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+TimeoutError: timed out
+"21:10:25 | INFO     | fact_agent | Logging initialized"
+"21:10:55 | INFO     | fact_agent | Logging initialized"
+"21:11:41 | INFO     | fact_agent | Logging initialized"
+"21:11:41 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"21:11:41 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"21:13:15 | INFO     | fact_agent | Logging initialized"
+"21:13:15 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
+"21:13:15 | INFO     | fact_agent.fact_agent.memory_extractor | Stored memories"
